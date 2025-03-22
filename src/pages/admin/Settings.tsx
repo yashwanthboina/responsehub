@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { CheckCircle, Mail, Bell, ExternalLink, Download, Upload, Database, Save } from "lucide-react";
@@ -262,7 +261,7 @@ const Settings: React.FC = () => {
                       rows={6}
                     />
                     <p className="text-xs text-gray-500 mt-1">
-                      Available variables: {{event_name}}, {{rating}}, {{comment}}, {{user_name}}
+                      Available variables: {"{"}{"{"}<span>event_name</span>{"}"}{"}"},  {"{"}{"{"}<span>rating</span>{"}"}{"}"},  {"{"}{"{"}<span>comment</span>{"}"}{"}"},  {"{"}{"{"}<span>user_name</span>{"}"}{"}"}
                     </p>
                   </div>
                   
@@ -275,7 +274,7 @@ const Settings: React.FC = () => {
                       rows={6}
                     />
                     <p className="text-xs text-gray-500 mt-1">
-                      Available variables: {{date_range}}, {{total_feedback}}, {{average_rating}}, {{top_events}}
+                      Available variables: {"{"}{"{"}<span>date_range</span>{"}"}{"}"},  {"{"}{"{"}<span>total_feedback</span>{"}"}{"}"},  {"{"}{"{"}<span>average_rating</span>{"}"}{"}"},  {"{"}{"{"}<span>top_events</span>{"}"}{"}"}
                     </p>
                   </div>
                   
