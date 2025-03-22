@@ -32,6 +32,9 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children, className = "" }) => {
                 Real-time feedback platform for events and conferences.
                 Collect, analyze, and improve with valuable insights.
               </p>
+              <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">
+                Designed and developed by <span className="font-semibold">TEAM API AVENGERS (YASWANTH BOINA)</span>
+              </p>
             </div>
             <div>
               <h4 className="text-md font-medium mb-3">Quick Links</h4>
@@ -44,10 +47,15 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children, className = "" }) => {
             <div>
               <h4 className="text-md font-medium mb-3">Contact</h4>
               <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
-                info@feedbackflow.com
+                <a href="mailto:boinayashwanth@gmail.com" className="hover:text-primary transition-colors">boinayashwanth@gmail.com</a>
+              </p>
+              <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
+                Phone: <a href="tel:+919959277565" className="hover:text-primary transition-colors">+91 9959277565</a>
               </p>
               <p className="text-sm text-gray-600 dark:text-gray-300">
-                123 Feedback Street, San Francisco, CA 94107
+                <a href="https://www.linkedin.com/in/yaswanth-boina/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+                  Connect on LinkedIn
+                </a>
               </p>
             </div>
           </div>
