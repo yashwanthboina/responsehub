@@ -1,10 +1,9 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { formatDistanceToNow } from "date-fns";
 import { MapPin, Calendar, Star } from "lucide-react";
-import { Event } from "@/contexts/EventContext";
+import { Event } from "@/types/eventTypes";
 import RatingStars from "./RatingStars";
 import { Badge } from "@/components/ui/badge";
 

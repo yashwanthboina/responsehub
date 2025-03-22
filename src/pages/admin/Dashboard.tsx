@@ -1,4 +1,3 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -16,11 +15,13 @@ import AdminLayout from "@/components/layout/AdminLayout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useEvents } from "@/contexts/EventContext";
+import { useFeedback } from "@/contexts/FeedbackContext";
 import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip } from "recharts";
 import FeedbackItem from "@/components/common/FeedbackItem";
 
 const Dashboard: React.FC = () => {
-  const { events, feedback, loading } = useEvents();
+  const { events, loading } = useEvents();
+  const { feedback } = useFeedback();
   
   // Count events by status
   const activeEvents = events.filter(event => event.status === "active");

@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { toast } from "sonner";
 import { Feedback } from "@/types/eventTypes";
@@ -23,7 +22,6 @@ export const FeedbackProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const { events, updateEvent } = useEvents();
 
   useEffect(() => {
-    // Load feedback with a delay to simulate API fetch
     const loadData = async () => {
       try {
         setLoading(true);
@@ -42,14 +40,12 @@ export const FeedbackProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     loadData();
   }, []);
 
-  // Update local storage whenever feedback changes
   useEffect(() => {
     if (!loading && feedback.length > 0) {
       saveFeedback(feedback);
     }
   }, [feedback, loading]);
 
-  // Feedback operations
   const submitFeedback = (feedbackData: Omit<Feedback, "id" | "timestamp">) => {
     const newFeedback: Feedback = {
       ...feedbackData,
@@ -59,7 +55,6 @@ export const FeedbackProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     
     setFeedback((prev) => [...prev, newFeedback]);
     
-    // Update event stats
     const event = events.find(e => e.id === feedbackData.eventId);
     if (event) {
       const eventFeedback = [...feedback, newFeedback].filter(
@@ -88,7 +83,6 @@ export const FeedbackProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     
     setFeedback((prev) => prev.filter((item) => item.id !== id));
     
-    // Update event stats
     const eventId = feedbackToDelete.eventId;
     const event = events.find(e => e.id === eventId);
     

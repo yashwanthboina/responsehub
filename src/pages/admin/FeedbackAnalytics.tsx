@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
@@ -50,12 +49,15 @@ import {
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import FeedbackItem from "@/components/common/FeedbackItem";
-import { useEvents, Feedback } from "@/contexts/EventContext";
+import { useEvents } from "@/contexts/EventContext";
+import { useFeedback } from "@/contexts/FeedbackContext";
+import { Feedback } from "@/types/eventTypes";
 import { format, parseISO, startOfDay, isAfter, isBefore, isEqual } from "date-fns";
 import { toast } from "sonner";
 
 const FeedbackAnalytics: React.FC = () => {
-  const { events, feedback, deleteFeedback } = useEvents();
+  const { events } = useEvents();
+  const { feedback, deleteFeedback } = useFeedback();
   
   // State for filtering
   const [searchTerm, setSearchTerm] = useState("");

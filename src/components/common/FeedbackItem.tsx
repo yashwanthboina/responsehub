@@ -1,8 +1,7 @@
-
 import React from "react";
 import { formatDistanceToNow } from "date-fns";
 import RatingStars from "./RatingStars";
-import { Feedback } from "@/contexts/EventContext";
+import { Feedback } from "@/types/eventTypes";
 import { useAuth } from "@/contexts/AuthContext";
 import { Trash } from "lucide-react";
 import { Button } from "@/components/ui/button";

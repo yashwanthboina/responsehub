@@ -42,7 +42,8 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
-import { useEvents, Event } from "@/contexts/EventContext";
+import { useEvents } from "@/contexts/EventContext";
+import { Event } from "@/types/eventTypes";
 import { format } from "date-fns";
 import { toast } from "sonner";
 
