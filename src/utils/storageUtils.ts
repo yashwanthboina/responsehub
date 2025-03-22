@@ -1,57 +1,38 @@
 
 import { Event, Feedback, MOCK_EVENTS, MOCK_FEEDBACK } from "@/types/eventTypes";
 
-// Storage keys
 const EVENTS_STORAGE_KEY = "feedbackflow_events";
 const FEEDBACK_STORAGE_KEY = "feedbackflow_feedback";
+const STORAGE_INITIALIZED_KEY = "feedbackflow_initialized";
 
-// Load events from localStorage or use mock data
-export const loadEvents = (): Event[] => {
-  try {
-    const storedEvents = localStorage.getItem(EVENTS_STORAGE_KEY);
-    return storedEvents ? JSON.parse(storedEvents) : MOCK_EVENTS;
-  } catch (error) {
-    console.error("Error loading events from localStorage:", error);
-    return MOCK_EVENTS;
+// Initialize storage with mock data if not already initialized
+export const initializeStorage = () => {
+  if (!localStorage.getItem(STORAGE_INITIALIZED_KEY)) {
+    localStorage.setItem(EVENTS_STORAGE_KEY, JSON.stringify(MOCK_EVENTS));
+    localStorage.setItem(FEEDBACK_STORAGE_KEY, JSON.stringify(MOCK_FEEDBACK));
+    localStorage.setItem(STORAGE_INITIALIZED_KEY, "true");
+    console.log("Storage initialized with mock data");
   }
+};
+
+// Load events from localStorage
+export const loadEvents = (): Event[] => {
+  const storedEvents = localStorage.getItem(EVENTS_STORAGE_KEY);
+  return storedEvents ? JSON.parse(storedEvents) : [];
 };
 
 // Save events to localStorage
-export const saveEvents = (events: Event[]): void => {
-  try {
-    localStorage.setItem(EVENTS_STORAGE_KEY, JSON.stringify(events));
-  } catch (error) {
-    console.error("Error saving events to localStorage:", error);
-  }
+export const saveEvents = (events: Event[]) => {
+  localStorage.setItem(EVENTS_STORAGE_KEY, JSON.stringify(events));
 };
 
-// Load feedback from localStorage or use mock data
+// Load feedback from localStorage
 export const loadFeedback = (): Feedback[] => {
-  try {
-    const storedFeedback = localStorage.getItem(FEEDBACK_STORAGE_KEY);
-    return storedFeedback ? JSON.parse(storedFeedback) : MOCK_FEEDBACK;
-  } catch (error) {
-    console.error("Error loading feedback from localStorage:", error);
-    return MOCK_FEEDBACK;
-  }
+  const storedFeedback = localStorage.getItem(FEEDBACK_STORAGE_KEY);
+  return storedFeedback ? JSON.parse(storedFeedback) : [];
 };
 
 // Save feedback to localStorage
-export const saveFeedback = (feedback: Feedback[]): void => {
-  try {
-    localStorage.setItem(FEEDBACK_STORAGE_KEY, JSON.stringify(feedback));
-  } catch (error) {
-    console.error("Error saving feedback to localStorage:", error);
-  }
-};
-
-// Initialize storage with mock data if empty
-export const initializeStorage = (): void => {
-  if (!localStorage.getItem(EVENTS_STORAGE_KEY)) {
-    saveEvents(MOCK_EVENTS);
-  }
-  
-  if (!localStorage.getItem(FEEDBACK_STORAGE_KEY)) {
-    saveFeedback(MOCK_FEEDBACK);
-  }
+export const saveFeedback = (feedback: Feedback[]) => {
+  localStorage.setItem(FEEDBACK_STORAGE_KEY, JSON.stringify(feedback));
 };

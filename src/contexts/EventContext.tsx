@@ -1,9 +1,8 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { toast } from "sonner";
-import { Event, MOCK_EVENTS } from "@/types/eventTypes";
+import { Event } from "@/types/eventTypes";
 import { loadEvents, saveEvents } from "@/utils/storageUtils";
-import { useFeedback } from "./FeedbackContext";
 
 interface EventContextType {
   events: Event[];
@@ -21,7 +20,6 @@ const EventContext = createContext<EventContextType | undefined>(undefined);
 export const EventProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
-  const { feedback, deleteFeedbackByEventId } = useFeedback();
 
   // Load events on initial mount
   useEffect(() => {
@@ -56,9 +54,10 @@ export const EventProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     return events.find((event) => event.id === id);
   };
 
-  // Get feedback for a specific event
+  // Get feedback for a specific event - this is now delegated to FeedbackContext
   const getEventFeedback = (eventId: string) => {
-    return feedback.filter((item) => item.eventId === eventId);
+    // This will be empty as the real implementation is in FeedbackContext
+    return [];
   };
 
   // Create new event
@@ -88,8 +87,7 @@ export const EventProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   // Delete event
   const deleteEvent = (id: string) => {
     setEvents((prevEvents) => prevEvents.filter((event) => event.id !== id));
-    deleteFeedbackByEventId(id);
-    
+    // Note: deletion of related feedback is managed by FeedbackContext
     toast.success("Event deleted successfully!");
   };
 
@@ -114,5 +112,3 @@ export const useEvents = (): EventContextType => {
   }
   return context;
 };
-
-export type { Event };

@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -11,13 +10,15 @@ import { Checkbox } from "@/components/ui/checkbox";
 import RatingStars from "@/components/common/RatingStars";
 import FeedbackItem from "@/components/common/FeedbackItem";
 import { useEvents } from "@/contexts/EventContext";
+import { useFeedback } from "@/contexts/FeedbackContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
 
 const EventDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { getEvent, getEventFeedback, submitFeedback } = useEvents();
+  const { getEvent } = useEvents();
+  const { getEventFeedback, submitFeedback } = useFeedback();
   const { user, isAuthenticated } = useAuth();
   
   const [rating, setRating] = useState(5);
@@ -30,7 +31,6 @@ const EventDetails: React.FC = () => {
   const event = getEvent(id || "");
   const eventFeedback = getEventFeedback(id || "");
   
-  // Redirect if event doesn't exist
   if (!event) {
     navigate("/events");
     return null;
@@ -97,7 +97,6 @@ const EventDetails: React.FC = () => {
     setFeedbackSubmitted(true);
     setShowFeedbackForm(false);
     
-    // Reset form
     setRating(5);
     setComment("");
     setIsAnonymous(false);
@@ -130,7 +129,6 @@ const EventDetails: React.FC = () => {
           </Button>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Event Details */}
             <div className="lg:col-span-2">
               <div className="glass-panel rounded-lg overflow-hidden">
                 <div className="relative h-64 md:h-80">
@@ -193,7 +191,6 @@ const EventDetails: React.FC = () => {
               </div>
             </div>
 
-            {/* Feedback Section */}
             <div className="lg:col-span-1">
               <div className="glass-panel rounded-lg p-6 mb-6">
                 <h2 className="text-xl font-semibold mb-4">Event Feedback</h2>
@@ -247,7 +244,6 @@ const EventDetails: React.FC = () => {
         </motion.div>
       </div>
 
-      {/* Feedback Form Modal */}
       <AnimatePresence>
         {showFeedbackForm && (
           <motion.div

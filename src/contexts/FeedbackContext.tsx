@@ -1,8 +1,9 @@
+
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { toast } from "sonner";
 import { Feedback } from "@/types/eventTypes";
 import { loadFeedback, saveFeedback } from "@/utils/storageUtils";
-import { useEvents } from "./EventContext";
+import { useEvents } from "@/contexts/EventContext";
 
 interface FeedbackContextType {
   feedback: Feedback[];
